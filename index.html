@@ -8,7 +8,7 @@
   body { font-family: Arial, sans-serif; max-width: 640px; margin: 0 auto; padding: 0 20px; line-height: 1.5; color: #222; }
   h1 { margin-bottom: 0; }
   .tagline { color: #666; margin-top: 4px; }
-  h2 { border-bottom: 1px solid #ddd; padding-bottom: 4px; margin-top: 40px; scroll-margin-top: 60px; }
+  h2 { border-bottom: 1px solid #ddd; padding-bottom: 4px; margin-top: 40px; }
   h3 { margin-bottom: 2px; }
   .meta { color: #666; font-size: 14px; margin-top: 0; }
   a { color: #1a5276; }
@@ -30,6 +30,7 @@
     color: #333;
     font-size: 14px;
     font-weight: bold;
+    cursor: pointer;
   }
   nav.navbar a:hover {
     color: #1a5276;
@@ -40,16 +41,16 @@
 <body>
 
 <nav class="navbar">
-  <a href="#about">About</a>
-  <a href="#experience">Experience</a>
-  <a href="#projects">Projects</a>
-  <a href="#skills">Skills</a>
+  <a data-target="about">About</a>
+  <a data-target="experience">Experience</a>
+  <a data-target="projects">Projects</a>
+  <a data-target="skills">Skills</a>
 </nav>
 
 <div class="page-content">
 
 <h1>Anson Wang</h1>
-<p class = "tagline">CS student at Carnegie Mellon, applying AI to healthcare</p>
+<p class="tagline">CS student at Carnegie Mellon, applying AI to healthcare</p>
 <p><a href="mailto:ansonw2@andrew.cmu.edu">ansonw2@andrew.cmu.edu</a> &middot; Pittsburgh, PA</p>
 
 <p>I got into computer science through math, and into AI through a research project that used it to read chest CT scans. I'm applying to Humana's Technology Internship for Summer 2027, hoping to bring that healthcare-and-AI background to a real clinical and data team.</p>
@@ -92,6 +93,19 @@
 <strong>Tools:</strong> Supabase, LaTeX</p>
 
 </div>
+
+<script>
+  document.querySelectorAll('nav.navbar a[data-target]').forEach(function(link) {
+    link.addEventListener('click', function() {
+      var el = document.getElementById(link.getAttribute('data-target'));
+      if (el) {
+        var offset = 60;
+        var top = el.getBoundingClientRect().top + window.pageYOffset - offset;
+        window.scrollTo({ top: top, behavior: 'smooth' });
+      }
+    });
+  });
+</script>
 
 </body>
 </html>
